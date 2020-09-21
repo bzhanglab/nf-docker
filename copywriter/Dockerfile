@@ -5,6 +5,6 @@ LABEL description="R package CopywriteR for detection of copy number variants an
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     libbz2-dev \
     liblzma-dev
-RUN Rscript -e 'install.packages("BiocManager"); BiocManager::install("CopywriteR")' \
+RUN Rscript -e 'install.packages("BiocManager"); BiocManager::install("CopywriteR", version = "3.11")' \
     && Rscript -e "stopifnot(all(c('BiocManager', 'CopywriteR') %in% installed.packages()[, 'Package']))"
 CMD ["R"]

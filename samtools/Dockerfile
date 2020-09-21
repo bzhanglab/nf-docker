@@ -2,7 +2,7 @@
 FROM ubuntu:18.04
 LABEL maintainer="Zhiao Shi <zhiao.shi@gmail.com>"
 LABEL description="samtools"
-LABEL version="1.9"
+LABEL version="1.10"
 #name and email of the person who maintains the file
 
 # Updating ubuntu and installing other necessary software
@@ -31,20 +31,20 @@ RUN apt-get clean all \
 	&& apt-get clean
 
 #install htslib
-RUN wget https://github.com/samtools/htslib/releases/download/1.9/htslib-1.9.tar.bz2 \
-	&& tar -xvjf htslib-1.9.tar.bz2 \
-	&& rm htslib-1.9.tar.bz2 \
-	&& cd htslib-1.9 \
+RUN wget https://github.com/samtools/htslib/releases/download/1.10.2/htslib-1.10.2.tar.bz2 \
+	&& tar -xvjf htslib-1.10.2.tar.bz2 \
+	&& rm htslib-1.10.2.tar.bz2 \
+	&& cd htslib-1.10.2 \
 	&& ./configure --prefix=/usr/local/ \
 	&& make \
 	&& make install \
 	&& cd ..
 
 #install Samtools
-RUN wget https://github.com/samtools/samtools/archive/1.9.tar.gz \
-	&& tar -xvzf 1.9.tar.gz \
-	&& rm 1.9.tar.gz \
-	&& cd samtools-1.9 \
+RUN wget https://github.com/samtools/samtools/archive/1.10.tar.gz \
+	&& tar -xvzf 1.10.tar.gz \
+	&& rm 1.10.tar.gz \
+	&& cd samtools-1.10 \
 	&& autoheader \
 	&& autoconf -Wno-syntax \
 	&& ./configure --prefix=/usr/local/ \
