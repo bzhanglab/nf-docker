@@ -23,4 +23,5 @@ RUN chmod o+rx /home/gistic
 ENV LD_LIBRARY_PATH /home/gistic/MATLAB_Compiler_Runtime/v83/runtime/glnxa64:/home/gistic/MATLAB_Compiler_Runtime/v83/bin/glnxa64:/home/gistic/MATLAB_Compiler_Runtime/v83/sys/os/glnxa64:${LD_LIBRARY_PATH}
 ENV XAPPLRESDIR /home/gistic/MATLAB_Compiler_Runtime/v83/X11/app-defaults
 ENV PATH=/home/gistic:${PATH}
+COPY gencode.v34.basic.annotation.mat /home/gistic/refgenefiles
 CMD ["/bin/bash"]
