@@ -53,11 +53,7 @@ while($raw=<IN>)
 {
 	$raw=~s/\n|\r//g;
 	@inf=split(/\t/,$raw);
-	if($inf[9]!~/_/)
-	{
-		print OUT $raw,"\n";
-	}
-	else
+	if($inf[8]!~/intergenic_region/)
 	{
 		@inf2=split(/,/,$inf[9]);
 		print OUT "$inf[0]\t$inf[1]\t$inf[2]\t$inf[3]\t$inf[4]\t$inf[5]\t$inf[6]\t$inf[7]\t$inf[8]";
