@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 LABEL maintainer="Zhiao Shi <zhiao.shi@gmail.com>"
 LABEL description="Genomic Identification of Significant Targets in Cancer"
-LABEL version="2.0.23"
+LABEL version="2.0.23-1"
 
 # Note: FROM java and FROM r-base work too but take much longer apt-get updating
 
