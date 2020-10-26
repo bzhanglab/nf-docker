@@ -63,7 +63,11 @@ pdf(file=file.path(output_dir, paste0(matrix_name_flag,"_tumor_normal_raw_log2(x
 sample_labels=rep("Tumor",length(colnames(raw_matrix)))
 sample_labels[grepl("_A",colnames(raw_matrix))]="Normal"
 res.pca <- prcomp(na.omit(t(raw_matrix)),scale = TRUE)
-p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+if(sum(sample_labels == "Normal") > 0) {
+   p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+} else {
+  p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, ellipse.level = 0.95)
+}
 print(p)
 dev.off()
 
@@ -71,7 +75,11 @@ pdf(file=file.path(output_dir, paste0(matrix_name_flag,"_tumor_normal_UQ_log2(x+
 sample_labels=rep("Tumor",length(colnames(normalized_matrix)))
 sample_labels[grepl("_A",colnames(normalized_matrix))]="Normal"
 res.pca <- prcomp(na.omit(t(normalized_matrix)),scale = TRUE)
-p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+if (sum(sample_labels == "Normal") > 0) {
+   p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, addEllipses = TRUE, ellipse.level = 0.95)
+} else {
+  p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, ellipse.level = 0.95)
+}
 print(p)
 dev.off()
 
@@ -134,7 +142,11 @@ pdf(file=file.path(output_dir, paste0(matrix_name_flag,"_tumor_normal_raw_log2(x
 sample_labels=rep("Tumor",length(colnames(raw_matrix)))
 sample_labels[grepl("_A",colnames(raw_matrix))]="Normal"
 res.pca <- prcomp(na.omit(t(raw_matrix)),scale = TRUE)
-p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+if (sum(sample_labels == "Normal") > 0) {
+   p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, addEllipses = TRUE, ellipse.level = 0.95)
+} else{
+   p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, ellipse.level = 0.95)
+}
 print(p)
 dev.off()
 
@@ -142,7 +154,12 @@ pdf(file=file.path(output_dir, paste0(matrix_name_flag,"_tumor_normal_UQ_log2(x+
 sample_labels=rep("Tumor",length(colnames(raw_matrix)))
 sample_labels[grepl("_A",colnames(raw_matrix))]="Normal"
 res.pca <- prcomp(na.omit(t(raw_matrix)),scale = TRUE)
-p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+if (sum(sample_labels == "Normal") > 0){
+   p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+} else{
+  p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, ellipse.level = 0.95)
+}
+
 print(p)
 dev.off()
 
@@ -180,7 +197,11 @@ pdf(file=file.path(output_dir, paste0(matrix_name_flag,"_tumor_normal_raw_log2(x
 sample_labels=rep("Tumor",length(colnames(raw_matrix)))
 sample_labels[grepl("_A",colnames(raw_matrix))]="Normal"
 res.pca <- prcomp(na.omit(t(raw_matrix)),scale = TRUE)
-p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+if (sum(sample_labels == "Normal") > 0) {
+   p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+} else{
+  p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, ellipse.level = 0.95)
+}
 print(p)
 dev.off()
 
@@ -220,7 +241,11 @@ pdf(file=file.path(output_dir, paste0(matrix_name_flag,"_tumor_normal_raw_log2(x
 sample_labels=rep("Tumor",length(colnames(raw_matrix)))
 sample_labels[grepl("_A",colnames(raw_matrix))]="Normal"
 res.pca <- prcomp(na.omit(t(raw_matrix)),scale = TRUE)
-p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+if (sum(sample_labels == "Normal") > 0) {
+   p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, addEllipses = TRUE, ellipse.level = 0.95)
+} else {
+  p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, ellipse.level = 0.95)
+}
 print(p)
 dev.off()
 
@@ -260,7 +285,11 @@ pdf(file=file.path(output_dir, paste0(matrix_name_flag,"_tumor_normal_raw_log2(x
 sample_labels=rep("Tumor",length(colnames(raw_matrix)))
 sample_labels[grepl("_A",colnames(raw_matrix))]="Normal"
 res.pca <- prcomp(na.omit(t(raw_matrix)),scale = TRUE)
-p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+if (sum(sample_labels == "Normal") > 0) {
+  p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, addEllipses = TRUE, ellipse.level = 0.95)
+} else {
+  p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, ellipse.level = 0.95)
+}
 print(p)
 dev.off()
 
@@ -300,7 +329,11 @@ pdf(file=file.path(output_dir, paste0(matrix_name_flag,"_tumor_normal_raw_log2(x
 sample_labels=rep("Tumor",length(colnames(raw_matrix)))
 sample_labels[grepl("_A",colnames(raw_matrix))]="Normal"
 res.pca <- prcomp(na.omit(t(raw_matrix)),scale = TRUE)
-p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
+if (sum(sample_labels == "Normal") > 0) {
+  p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, addEllipses = TRUE, ellipse.level = 0.95)
+} else {
+  p <- fviz_pca_ind(res.pca, label = "none", habillage = sample_labels, ellipse.level = 0.95)
+}
 print(p)
 dev.off()
 

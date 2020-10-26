@@ -1,6 +1,6 @@
 FROM rocker/tidyverse:latest
 LABEL maintainer="Zhiao Shi <zhiao.shi@gmail.com>"
-LABEL version="1.0.1"
+LABEL version="1.0.2"
 
 RUN apt-get update && apt-get upgrade --yes && \
     apt-get install -y curl
