@@ -32,6 +32,13 @@ RUN wget https://github.com/deweylab/RSEM/archive/v1.3.3.tar.gz \
 	&& mv RSEM-1.3.3 /opt/ \
   && ln -s /opt/RSEM-1.3.3 /opt/RSEM
 
+#install STAR
+RUN wget https://github.com/alexdobin/STAR/archive/2.7.6a.tar.gz \
+  && tar -xzf 2.7.6a.tar.gz \
+  && rm 2.7.6a.tar.gz \ 
+  && mv STAR-2.7.6a /opt/ \
+  && ln -s /opt/STAR-2.7.6a /opt/STAR
+
 # http://bugs.python.org/issue19846
 ENV LANG C.UTF-8
 
