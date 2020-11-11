@@ -7,5 +7,6 @@ RUN apt-get update && apt-get upgrade --yes && \
 RUN install2.r --error corrplot purrr factoextra BiocManager
 RUN Rscript -e 'BiocManager::install(c("edgeR", "preprocessCore"))'
 COPY src/combine_and_summary.r /usr/src
+COPY src/combine_and_summary_polya.r /usr/src
 
 CMD ["R"]
