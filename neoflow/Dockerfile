@@ -1,7 +1,7 @@
 #specifying the base image
 FROM ubuntu:19.10
 
-MAINTAINER Kai Li <kail@bcm.edu>
+LABEL maintainer="kail@bcm.edu"
 
 #USER root
 
@@ -56,11 +56,11 @@ RUN wget http://www.proteoannotator.org/datasets/releases/ProteoAnnotator-1.7.86
 	&& unzip ProteoAnnotator-1.7.86.zip \
 	&& rm ProteoAnnotator-1.7.86.zip \
 	&& mv ProteoAnnotator-1.7.86/mzidlib-1.7 /opt/mzidlib-1.7/
-#install pepquery-1.3
-RUN wget http://www.pepquery.org/data/PepQuery_v1.3.0.tar.gz \
-	&& tar -xzvf PepQuery_v1.3.0.tar.gz \
-	&& rm PepQuery_v1.3.0.tar.gz \
-	&& mv PepQuery_v1.3.0 /opt/PepQuery_v1.3.0/
+#install pepquery-1.6.0
+RUN wget http://pepquery.org/data/pepquery-1.6.0.tar.gz \
+	&& tar -xzvf pepquery-1.6.0.tar.gz \
+	&& rm pepquery-1.6.0.tar.gz \
+	&& mv pepquery-1.6.0 /opt/pepquery-1.6.0/
 
 RUN wget -O /opt/customprodbj.jar https://github.com/wenbostar/Customprodbj/releases/download/v1.1.0/customprodbj.jar
 
