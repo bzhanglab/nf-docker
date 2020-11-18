@@ -53,12 +53,16 @@ while($raw=<IN>)
 {
 	$raw=~s/\n|\r//g;
 	@inf=split(/\t/,$raw);
-	if($inf[8]!~/intergenic_region/)
+	@inf2=split(/,/,$inf[9]);
+	if($inf[8]!~/intergenic_region/&&$inf[9]=~/^ENSG/)
+    {
+		print OUT $raw,"\n";
+	}
+	elsif(exists($id_to_name{$inf2[0]}))
 	{
-		@inf2=split(/,/,$inf[9]);
-		print OUT "$inf[0]\t$inf[1]\t$inf[2]\t$inf[3]\t$inf[4]\t$inf[5]\t$inf[6]\t$inf[7]\t$inf[8]";
-		print OUT "\t$id_to_name{$inf2[0]}";
-		print OUT "\t$inf[10]\t$inf[11]\n";
+        print OUT "$inf[0]\t$inf[1]\t$inf[2]\t$inf[3]\t$inf[4]\t$inf[5]\t$inf[6]\t$inf[7]\t$inf[8]";
+        print OUT "\t$id_to_name{$inf2[0]}";
+        print OUT "\t$inf[10]\t$inf[11]\n";
 	}
 }
 close(IN);
