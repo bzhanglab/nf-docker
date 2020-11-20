@@ -285,16 +285,19 @@ for raw_path in typing_files:
                         writer.writerow(seq)
 
 # Make Master Matrix
-binding_result = pd.read_csv(save_name,
+if (len(records) != 0):
+    binding_result = pd.read_csv(save_name,
                              header=None,
                              names=['HLA_type',
                                     'Neoepitope',
                                     'netMHCpan_binding_affinity_nM',
-                                    'netMHCpan_precentail_rank'], low_memory=False)
-somatic_mutation = pd.read_csv(save_path + tmp_dir + '/somatic_mutation_reference.csv', low_memory=False)
-master_matrix = pd.merge(somatic_mutation, binding_result, on='Neoepitope')
-master_matrix.to_csv(save_path + sample_id + '_binding_prediction_result.csv', index=False)
+                                    'netMHCpan_precentile_rank'], low_memory=False)
+    somatic_mutation = pd.read_csv(save_path + tmp_dir + '/somatic_mutation_reference.csv', low_memory=False)
+    master_matrix = pd.merge(somatic_mutation, binding_result, on='Neoepitope')
+    master_matrix.to_csv(save_path + sample_id + '_binding_prediction_result.csv', index=False)
+else:
+    empty_writer = open(save_path + sample_id + '_binding_prediction_result.csv', "w")
+    empty_writer.write("Variant_ID,Chr,Start,End,Ref,Alt,Variant_Type,Variant_Function,Gene,mRNA,Neoepitope,Variant_Start,Variant_End,AA_before,AA_after,HLA_type,netMHCpan_binding_affinity_nM,netMHCpan_precentile_rank")
 
 # clean up
 os.system('rm -r ' + save_path + tmp_dir)
-
