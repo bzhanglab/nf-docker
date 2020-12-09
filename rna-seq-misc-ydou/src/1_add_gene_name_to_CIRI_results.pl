@@ -54,7 +54,7 @@ while($raw=<IN>)
 	$raw=~s/\n|\r//g;
 	@inf=split(/\t/,$raw);
 	@inf2=split(/,/,$inf[9]);
-	if($inf[8]!~/intergenic_region/&&$inf[9]=~/^ENSG/)
+	if($inf[8]!~/intergenic_region/&&length($inf[9])>0)
     {
 		print OUT $raw,"\n";
 	}
