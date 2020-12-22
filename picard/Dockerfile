@@ -7,9 +7,10 @@ RUN apt-get update && \
     apt-get --no-install-recommends install -y \
     git \
     r-base \
+    pigz \
     ant && \
     apt-get clean autoclean && \
-    apt-get autoremove -y
+    apt-get autoremove -y 
 
 
 RUN mkdir /usr/picard
