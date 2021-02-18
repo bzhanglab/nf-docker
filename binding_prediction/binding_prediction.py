@@ -111,6 +111,13 @@ with open(AA_form_file) as csvfile2:
                     else:
                         start_position = int(AA_Pos)
                         end_position = start_position + len(AA_Var) - 1
+                elif Variant_Type == "nonframeshift substitution":
+                    if "-" in AA_Pos:
+                        start_position = int(AA_Pos.split('-')[0])
+                        end_position = start_position + len(AA_Var) - 1
+                    else:
+                        start_position = int(AA_Pos)
+                        end_position = start_position + len(AA_Var) - 1
                     
                 elif Variant_Type == "frameshift deletion":
                     if AA_Var == "-":
