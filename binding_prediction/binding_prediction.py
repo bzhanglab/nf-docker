@@ -156,6 +156,9 @@ with open(AA_form_file) as csvfile2:
 
                 elif Variant_Type == "stopgain":
                     continue
+                elif Variant_Type == "fusion":
+                    start_position = 0
+                    end_position = 0
                 else:
                     start_position = int(AA_Pos)
                     end_position = int(AA_Pos)
@@ -166,62 +169,84 @@ with open(AA_form_file) as csvfile2:
                                   np.array(end_position).reshape(1, 1),
                                   np.array(AA_Var).reshape(1, 1)
                                   ))
+                
+                if Variant_Type == "fusion":
+                    if len(AA_Var) >= 8:
+                        long_AA_seq = AA_Var
+                        var_info = line[0, 0:10].reshape(1, 10)
+                        var_id = var_info[0, 0]
+                        long_AA_sequence_list.append(long_AA_seq)
+                        
+                        for AA_len in range(8, 12):
+                            if len(AA_Var)>=AA_len:
+                                for ind in range(0, len(AA_Var)-AA_len+1):
+                                    AA_seq = str(AA_Var[ind:ind+AA_len])
+                                    AA_change = ["fusion", "fusion"]
+                                    
+                                    output_line = np.hstack((np.array(var_info).reshape(1, 10),
+                                                     np.array(AA_seq).reshape(1, 1),
+                                                     np.array("fusion").reshape(1, 1),
+                                                     np.array("fusion").reshape(1, 1),
+                                                     np.array(AA_change).reshape(1, 2)))
+                         
+                                    if int(len(output_line[0, 10])) == AA_len:
+                                        writer.writerow(output_line.reshape(output_line.shape[1], ))
 
-                # print("line is ", line)
+                        
+                else:
+                    start = int(line[0, 11]) - 1
+                    end = int(line[0, 12]) - 1
+                    var_info = line[0, 0:10].reshape(1, 10)
+                    var_id = var_info[0, 0]
+                    gap = end - start
 
-                start = int(line[0, 11]) - 1
-                end = int(line[0, 12]) - 1
-                var_info = line[0, 0:10].reshape(1, 10)
-                var_id = var_info[0, 0]
-                gap = end - start
+                    reference_seq = protein_data[ids.index(var_id)]
+                    cut_start = 0
+                    cut_end = len(reference_seq)
+                    if start > 11:
+                        cut_start = start - 11
 
-                reference_seq = protein_data[ids.index(var_id)]
-                cut_start = 0
-                cut_end = len(reference_seq)
-                if start > 11:
-                    cut_start = start - 11
+                    if end < cut_end - 11:
+                        cut_end = end + 11
 
-                if end < cut_end - 11:
-                    cut_end = end + 11
+                    long_AA_seq = reference_seq.seq[cut_start:cut_end]
+                    long_AA_seq = str(long_AA_seq)
+                    
+                    for AA_len in range(8, 12):
+                        p_end = 1
+                        for ind in range(AA_len + gap):
+                            AA_seq = protein_data[ids.index(var_id)].seq[end - ind:end + AA_len - ind]
+                            AA_sequence = str(AA_seq)
+                            AA_info = var_info
+                            AA_id = str(var_id)
+                            if p_end > AA_len:
+                                p2 = AA_len
+                                position_end = p2
+                            else:
+                                p2 = p_end
+                                position_end = p2
+                            if p_end - gap < 1:
+                                p1 = 1
+                                position = p1
+                            else:
+                                p1 = p_end - gap
+                                position = p1
+                            p_end = p_end + 1
+                            AA_change = []
+                            AA_change.append(line[0, 10])
+                            AA_change.append(str(AA_seq)[p1 - 1:p2])
 
-                long_AA_seq = reference_seq.seq[cut_start:cut_end]
-                long_AA_seq = str(long_AA_seq)
-                # print("long_AA_seq from db is ", long_AA_seq)
-                long_AA_sequence_list.append(long_AA_seq)
+                            output_line = np.hstack((np.array(AA_info).reshape(1, 10),
+                                                     np.array(AA_sequence).reshape(1, 1),
+                                                     np.array(position).reshape(1, 1),
+                                                     np.array(position_end).reshape(1, 1),
+                                                     np.array(AA_change).reshape(1, 2)))
+                            # print("Output line is ", output_line)
 
-                for AA_len in range(8, 12):
-                    p_end = 1
-                    for ind in range(AA_len + gap):
-                        AA_seq = protein_data[ids.index(var_id)].seq[end - ind:end + AA_len - ind]
-                        AA_sequence = str(AA_seq)
-                        AA_info = var_info
-                        AA_id = str(var_id)
-                        if p_end > AA_len:
-                            p2 = AA_len
-                            position_end = p2
-                        else:
-                            p2 = p_end
-                            position_end = p2
-                        if p_end - gap < 1:
-                            p1 = 1
-                            position = p1
-                        else:
-                            p1 = p_end - gap
-                            position = p1
-                        p_end = p_end + 1
-                        AA_change = []
-                        AA_change.append(line[0, 10])
-                        AA_change.append(str(AA_seq)[p1 - 1:p2])
+                            if int(len(output_line[0, 10])) == AA_len:
+                                writer.writerow(output_line.reshape(output_line.shape[1], ))
 
-                        output_line = np.hstack((np.array(AA_info).reshape(1, 10),
-                                                 np.array(AA_sequence).reshape(1, 1),
-                                                 np.array(position).reshape(1, 1),
-                                                 np.array(position_end).reshape(1, 1),
-                                                 np.array(AA_change).reshape(1, 2)))
-                        # print("Output line is ", output_line)
-
-                        if int(len(output_line[0, 10])) == AA_len:
-                            writer.writerow(output_line.reshape(output_line.shape[1], ))
+                    long_AA_sequence_list.append(long_AA_seq)   
 
 records = []
 for seq in set(long_AA_sequence_list):

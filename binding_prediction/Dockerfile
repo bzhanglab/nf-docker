@@ -1,6 +1,6 @@
 FROM jupyter/datascience-notebook:python-3.7.6
 LABEL maintainer="Zhiao Shi <zhiao.shi@gmail.com>"
-LABEL version=1.0.1
+LABEL version=1.0.2
 
 #specify the command executed when the container is started
 USER root
