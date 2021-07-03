@@ -132,10 +132,13 @@ with open(AA_form_file) as csvfile2:
                             start_position = int(AA_Pos)
                             end_position = start_position + len(AA_Var) - 1
                 elif Variant_Type == "stoploss":
-                    start_position = int(AA_Pos)
-
-                    # AA_Var has * suffix sometime
-                    AA_Var = re.sub(r'\W+', '', AA_Var)
+                    if "-" in str(AA_Pos):
+                        ## handle cases like 555-558
+                        continue
+                    else:
+                        start_position = int(AA_Pos)
+                        # AA_Var has * suffix sometime
+                        AA_Var = re.sub(r'\W+', '', AA_Var)
 
                     end_position = int(AA_Pos) + len(AA_Var) - 1
                 elif Variant_Type == "nonsynonymous SNV":
