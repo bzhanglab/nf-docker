@@ -36,25 +36,24 @@ def main():
                 sample = row["sample"]
                 file_row = row["file_path"]
                 key_list = []
-                with open(file_row) as data:
-                        line = data.readline().strip()
-                        line = data.readline().strip()
-                        while line:
-                                gene1 = line.split("\t")[0]
-                                gene2 = line.split("\t")[1]
-                                breakpoint1 = line.split("\t")[4]
-                                breakpoint2 = line.split("\t")[5]
-                                confidence = line.split("\t")[14]
-                                sequence = line.split("\t")[28]
-                                if sequence != "." and sequence != "":
-                                        count += 1
-                                        sequence = regex.sub('', sequence)
-                                        sequence = sequence.upper()
-                                        key = breakpoint1 + "|" + breakpoint2 + "|" + gene1 + "|" + gene2 + "|" + sequence + "sample:" + sample
-                                        if key not in key_list:
-                                                key_list.append(key)
-                                                fusion_summary.write(breakpoint1 + "|" + breakpoint2 + "|" + gene1 + "|" + gene2 + "|" + sequence + "\t" + str(count) + "\t" + gene1 +"\t" + gene2 + "\t" + breakpoint1 + "\t" + breakpoint2 + "\t" + sequence + "\t" + "sample:" + sample + "\t" + "1" +"\n")
-                                line = data.readline().strip()
+                fusion_data = pd.read_csv(file_row, sep="\t", low_memory=False)
+                for f_i, f_row  in fusion_data.iterrows():
+                        gene1 = f_row['#gene1']
+                        gene2 = f_row['gene2']
+                        breakpoint1 = f_row['breakpoint1']
+                        breakpoint2 = f_row['breakpoint2']
+                        confidence = f_row['confidence']
+                        sequence = f_row['peptide_sequence']
+                        if sequence != "." and sequence != "":
+                                count += 1
+                                sequence = regex.sub('', sequence)
+                                sequence = sequence.upper()
+                                key = breakpoint1 + "|" + breakpoint2 + "|" + gene1 + "|" + gene2 + "|" + sequence + "sample:" + sample
+                                if key not in key_list:
+                                        key_list.append(key)
+                                        fusion_summary.write(
+                                                breakpoint1 + "|" + breakpoint2 + "|" + gene1 + "|" + gene2 + "|" + sequence + "\t" + str(
+                                                        count) + "\t" + gene1 + "\t" + gene2 + "\t" + breakpoint1 + "\t" + breakpoint2 + "\t" + sequence + "\t" + "sample:" + sample + "\t" + "1" + "\n")
         
         fusion_summary.close()
         dat_fusion = pd.read_csv(fusion_summary_file, sep="\t", header=0, low_memory=False, dtype=str)
