@@ -41,5 +41,6 @@ RUN wget https://github.com/alexdobin/STAR/archive/2.7.6a.tar.gz \
 
 # http://bugs.python.org/issue19846
 ENV LANG C.UTF-8
+ENV PATH="${PATH}:/opt/RSEM:/opt/STAR/bin/Linux_x86_64:/opt/bowtie2"
 
 CMD ["/bin/bash"]
