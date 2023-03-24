@@ -19,6 +19,6 @@ RUN R -e "install.packages(c('seriation'), repos='https://cran.rstudio.com/')"
 RUN R -e "BiocManager::install('impute', version = '${BIOC_VER}')"
 RUN R -e "BiocManager::install('preprocessCore', version = '${BIOC_VER}')"
 RUN R -e "install.packages(c('WGCNA'), repos='https://cran.rstudio.com/')"
-COPY NetSAM_1.38.1.tar.gz /tmp/
-RUN R CMD INSTALL /tmp/NetSAM_1.38.1.tar.gz
+COPY NetSAM_1.39.1.tar.gz /tmp/
+RUN R CMD INSTALL /tmp/NetSAM_1.39.1.tar.gz
 CMD ["R"]
