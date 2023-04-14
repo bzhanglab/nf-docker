@@ -5,5 +5,6 @@ LABEL maintainer="Zhiao Shi <zhiao.shi@gmail.com>"
 RUN pip install lifelines==0.27.4
 RUN pip install xgboost
 RUN pip install statannotations
+RUN pip install matplotlib==3.5.1
 
 CMD ["/bin/bash"]
