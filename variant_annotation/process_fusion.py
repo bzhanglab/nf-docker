@@ -36,6 +36,9 @@ def main():
             sample = row["sample"]
             file_row = row["file_path"]
             key_list = []
+            # if the file path does not end with tsv, then skip (e.g. 'NA')
+            if not file_row.endswith(".tsv"):
+                continue
             fusion_data = pd.read_csv(file_row, sep="\t", low_memory=False)
             for f_i, f_row  in fusion_data.iterrows():
                 gene1 = f_row['#gene1']
@@ -61,7 +64,6 @@ def main():
         dat_fusion = dat_fusion.fillna('0')
         dat_fusion.columns.name = None
         dat_fusion = dat_fusion.reset_index()
-        sample_with_fusion = list(set(dat_fusion.columns[1:]))
         
         with open(database) as data:
             line = data.readline().strip()
