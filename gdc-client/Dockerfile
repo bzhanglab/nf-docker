@@ -15,11 +15,9 @@ RUN apt-get clean all \
 	&& apt-get clean
 
 #install gdc-client
-RUN wget https://gdc.cancer.gov/files/public/file/gdc-client_v1.6.0_Ubuntu_x64-py3.7.zip \
-	&& unzip gdc-client_v1.6.0_Ubuntu_x64-py3.7.zip \
-	&& unzip gdc-client_v1.6.0_Ubuntu_x64.zip \
-	&& rm gdc-client_v1.6.0_Ubuntu_x64.zip \
-	&& rm gdc-client_v1.6.0_Ubuntu_x64-py3.7.zip \
+RUN wget https://gdc.cancer.gov/files/public/file/gdc-client_v1.6.1_Ubuntu_x64.zip \
+	&& unzip gdc-client_v1.6.1_Ubuntu_x64.zip \
+	&& rm gdc-client_v1.6.1_Ubuntu_x64.zip \
 	&& mv gdc-client /usr/bin/
 
 #specify the command executed when the container is started
