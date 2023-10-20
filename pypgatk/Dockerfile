@@ -24,7 +24,7 @@ WORKDIR /data
 RUN mkdir -p /tool/source && cd /tool/source
 
 RUN git config --global http.sslVerify false
-RUN git clone --depth 1 https://github.com/bigbio/py-pgatk.git /tool/source
+RUN git clone --depth 1 https://github.com/bzhanglab/py-pgatk.git /tool/source
 RUN cd /tool/source/ && pip3 install -r requirements.txt && python3 setup.py install
 
 ENV LC_ALL=C.UTF-8
