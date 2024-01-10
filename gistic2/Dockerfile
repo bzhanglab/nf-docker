@@ -25,4 +25,5 @@ ENV XAPPLRESDIR /home/gistic/MATLAB_Compiler_Runtime/v83/X11/app-defaults
 ENV PATH=/home/gistic:${PATH}
 COPY gencode.v34.basic.annotation.mat /home/gistic/refgenefiles
 COPY gencode.v34.basic.annotation_nochrm.mat /home/gistic/refgenefiles
+COPY gencode.v42.basic.annotation_nochrm.mat /home/gistic/refgenefiles
 CMD ["/bin/bash"]
