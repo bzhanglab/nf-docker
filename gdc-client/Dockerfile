@@ -4,7 +4,6 @@ LABEL maintainer="Zhiao Shi <zhiao.shi@gmail.com>"
 # Updating ubuntu and installing other necessary software
 RUN apt-get clean all && rm -rf /var/lib/apt/lists/* \
 	&& apt-get -y update --fix-missing \
-	&& apt-get upgrade -y \
 	&& apt-get install -y \
 		unzip \
 		wget \
