@@ -1,5 +1,4 @@
-# Use the R base image with R 4.4 installed
-FROM r-base:4.4.0
+FROM python:3.10.4
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -26,41 +25,21 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python from source with --enable-shared
-RUN wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz && \
-    tar -xf Python-3.10.4.tgz && \
-    cd Python-3.10.4 && \
-    ./configure --enable-shared && \
-    make && \
-    make install && \
-    ldconfig && \
-    cd .. && \
-    rm -rf Python-3.10.4 Python-3.10.4.tgz
-
-# Create and activate a virtual environment for Python
-RUN python3 -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
 # Install the SigProfilerMatrixGenerator Python package in the virtual environment
 RUN pip install --upgrade pip
 RUN pip install SigProfilerMatrixGenerator
+RUN python -c "from SigProfilerMatrixGenerator import install as genInstall; genInstall.install('GRCh38', rsync=False, bash=True)"
 
-# Install R packages
-RUN R -e "install.packages('devtools', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('reticulate', repos='http://cran.rstudio.com/')"
+RUN pip install SigProfilerPlotting
+RUN pip install SigProfilerExtractor
 
-# Configure reticulate to use the created Python virtual environment
-RUN R -e "library(reticulate); use_virtualenv('/opt/venv', required = TRUE)"
+RUN mkdir -p /opt/matplotlib_cache /opt/fontconfig_cache
+# change perfmissions to allow R to write to these directories
+RUN chmod 777 /opt/matplotlib_cache /opt/fontconfig_cache
 
-# Install SigProfilerMatrixGeneratorR from GitHub
-RUN R -e "devtools::install_github('AlexandrovLab/SigProfilerMatrixGeneratorR')"
-
-# Install the reference genome for SigProfilerMatrixGeneratorR
-RUN R -e "library('SigProfilerMatrixGeneratorR'); install('GRCh38', rsync=FALSE, bash=TRUE)"
-RUN R -e "devtools::install_github('AlexandrovLab/SigProfilerPlottingR')"
-RUN R -e "devtools::install_github('AlexandrovLab/SigProfilerExtractorR')"
-
-ENV RETICULATE_PYTHON="/opt/venv/bin/python"
+# Set environment variables for matplotlib and fontconfig caches
+ENV MPLCONFIGDIR=/opt/matplotlib_cache
+ENV XDG_CACHE_HOME=/opt/fontconfig_cache
 
 WORKDIR /usr/src/app
-CMD ["R"]
+CMD ["/bin/bash"]
