@@ -15,6 +15,7 @@ RUN R -e "BiocManager::install('maftools')"
 
 # Install CRAN packages
 RUN R -e "install.packages(c('tidyr', 'dplyr'), repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('R.utils', repos='http://cran.rstudio.com/')"
 
 # Set the working directory
 WORKDIR /usr/src/app
