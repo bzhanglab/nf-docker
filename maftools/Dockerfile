@@ -17,6 +17,8 @@ RUN R -e "BiocManager::install('maftools')"
 RUN R -e "install.packages(c('tidyr', 'dplyr'), repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('R.utils', repos='http://cran.rstudio.com/')"
 
+RUN apt-get update && apt-get install -y procps
+
 # Set the working directory
 WORKDIR /usr/src/app
 
