@@ -24,6 +24,7 @@ WORKDIR /usr/src/app
 
 # Copy your R script or project files into the container
 #COPY . .
+COPY GENCODE.V42.basic.CHR.isoform.selection.mapping.txt /usr/src/app/
 
 # Default command to run when starting the container
 CMD ["R"]
