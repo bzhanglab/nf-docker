@@ -3,7 +3,7 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 RUN mkdir -p /usr/share/man/man1
-RUN apt-get update && apt-get install -y unzip vim wget bzip2 make gcc g++ zlib1g-dev libbz2-dev liblzma-dev libncurses5-dev build-essential autoconf automake libtool openjdk-11-jre-headless
+RUN apt-get update && apt-get install -y unzip vim wget bzip2 make gcc g++ zlib1g-dev libbz2-dev liblzma-dev libncurses5-dev build-essential autoconf automake libtool openjdk-11-jre-headless procps
 
 RUN wget https://github.com/arq5x/bedtools2/archive/master.zip
 RUN unzip master.zip && rm master.zip
