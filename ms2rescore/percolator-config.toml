@@ -1,0 +1,77 @@
+# MS²Rescore configuration file using Percolator as rescoring engine
+# This configuration file demonstrates how to use Percolator for rescoring
+
+[ms2rescore]
+# Input PSM file (adjust path as needed)
+psm_file = "/data/psms.txt"
+
+# PSM file type (adjust based on your search engine output)
+# Supported formats: "msms" (MaxQuant), "mzid", "sage.tsv", "mzid", "xml" (X!Tandem), etc.
+psm_file_type = "msms"
+
+# Path to spectrum files
+spectrum_path = "/data/spectra"
+
+# Spectrum ID pattern (adjust based on your data)
+spectrum_id_pattern = '.*scan=(\d+)$'
+
+# FASTA file for protein inference (optional but recommended)
+fasta_file = "/data/proteins.fasta"
+
+# Output file prefix
+output_path = "/data/results"
+
+# Use multiple processes for faster processing
+processes = 4
+
+# Log level
+log_level = "info"
+
+[ms2rescore.rescoring_engine]
+# Use Percolator as rescoring engine
+[ms2rescore.rescoring_engine.percolator]
+# Percolator-specific options (all optional)
+# These correspond to Percolator command-line arguments
+
+# Training FDR threshold (default: 0.01)
+train_fdr = 0.01
+
+# Validation FDR threshold (default: 0.01)
+test_fdr = 0.01
+
+# Number of iterations (default: 10)
+maxiter = 10
+
+# Seed for random number generator
+seed = 1
+
+# Additional Percolator arguments can be added here
+# For example:
+# post_processing_tdc = true
+# only_psms = false
+
+[ms2rescore.feature_generators]
+# Enable MS²PIP for fragment ion prediction
+ms2pip = {}
+
+# Enable DeepLC for retention time prediction
+deeplc = {}
+
+# Enable basic features
+basic = {}
+
+# Optionally enable IM2Deep for ion mobility prediction (if available)
+# im2deep = {}
+
+[ms2rescore.modification_mapping]
+# Map modifications from your search engine to standard names
+# Example mappings (adjust based on your data):
+"ox" = "Oxidation"
+"ac" = "Acetylation"
+"de" = "Deamidation"
+"cm" = "Carbamidomethyl"
+
+[ms2rescore.fixed_modifications]
+# Define fixed modifications
+# Example:
+"Carbamidomethyl" = ["C"] 
