@@ -9,6 +9,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY inputconvertor.jar /app/inputconvertor.jar
+COPY inputconvertor.v1.1.0b.jar /app/inputconvertor.jar
 
 CMD ["bash"]
