@@ -9,6 +9,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY pXg.v2.4.2a.jar /app/pXg.jar
+COPY pXg.v2.4.3.jar /app/pXg.jar
 
 CMD ["bash"]
