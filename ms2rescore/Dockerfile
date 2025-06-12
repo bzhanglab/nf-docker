@@ -59,9 +59,18 @@ RUN echo "Checking installations..." && \
     percolator --help | head -1 || echo "Percolator installed (help unavailable)" && \
     echo "All installations completed successfully"
 
-# Create working directory
-WORKDIR /data
+ENV HOME=/opt/home
+RUN mkdir -p $HOME && chmod -R 777 $HOME
 
-# Set the default entrypoint
-ENTRYPOINT ["ms2rescore"]
-CMD ["--help"]
+# Set Matplotlib config directory to something writable
+ENV MPLCONFIGDIR=$HOME/.config/matplotlib
+
+# Optional: pre-create it for safety
+RUN mkdir -p $MPLCONFIGDIR && chmod -R 777 $MPLCONFIGDIR
+
+# Optional: pre-create ms2pip cache dir if it's known
+RUN mkdir -p $HOME/.ms2pip && chmod -R 777 $HOME/.ms2pip
+
+WORKDIR /data
+ENV MPLCONFIGDIR=/tmp/mplconfig
+CMD ["bash"]
