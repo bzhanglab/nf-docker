@@ -10,5 +10,6 @@ WORKDIR /app
 
 # Copy the JAR file into the container
 COPY pXg.v2.4.3.jar /app/pXg.jar
+COPY inputconvertor.v1.1.0b.jar /app/inputconvertor.jar
 
 CMD ["bash"]
