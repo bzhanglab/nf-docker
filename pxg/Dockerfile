@@ -14,7 +14,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY pXg.v2.4.3.jar /app/pXg.jar
-COPY inputconvertor.v1.1.0b.jar /app/inputconvertor.jar
+COPY pXg.v2.4.4-2025-08-11.jar /app/pXg.jar
+COPY inputConvertor.v1.0.0-2025-08-11.jar /app/inputconvertor.jar
 
 CMD ["bash"]

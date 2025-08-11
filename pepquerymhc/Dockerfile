@@ -14,7 +14,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY PepQueryMHC.v1.0.4.jar /app/PepQueryMHC.jar
+COPY PepQueryMHC.v1.0.5-2025-08-11.jar /app/PepQueryMHC.jar
 
 # install samtools
 RUN apt-get update && apt-get install -y \

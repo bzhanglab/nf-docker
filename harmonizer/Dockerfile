@@ -14,7 +14,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY Harmonizer.v1.0.0.jar /app/Harmonizer.jar
+COPY Harmonizer.v1.0.0-2025-08-11.jar /app/Harmonizer.jar
 
 
 CMD ["bash"]

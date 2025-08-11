@@ -14,7 +14,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY refineNeoDB.v1.0.0.jar /app/refineNeoDB.jar
-COPY makeNeoDB.v1.0.0.jar /app/makeNeoDB.jar
+COPY refineNeoDB.v1.0.0-2025-08-11.jar /app/refineNeoDB.jar
+COPY makeNeoDB.v1.0.0-2025-08-11.jar /app/makeNeoDB.jar
 
 CMD ["bash"]
