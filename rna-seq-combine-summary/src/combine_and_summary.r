@@ -151,9 +151,9 @@ print(p)
 dev.off()
 
 pdf(file=file.path(output_dir, paste0(matrix_name_flag,"_tumor_normal_UQ_log2(x+1)_BCM_pcaplot.pdf")),width=6,height=4)
-sample_labels=rep("Tumor",length(colnames(raw_matrix)))
-sample_labels[grepl("_A",colnames(raw_matrix))]="Normal"
-res.pca <- prcomp(na.omit(t(raw_matrix[which(apply(raw_matrix,1,sd)>0),])),scale = TRUE)
+sample_labels=rep("Tumor",length(colnames(normalized_matrix)))
+sample_labels[grepl("_A",colnames(normalized_matrix))]="Normal"
+res.pca <- prcomp(na.omit(t(normalized_matrix[which(apply(normalized_matrix,1,sd)>0),])),scale = TRUE)
 if (sum(sample_labels == "Normal") > 0){
    p <- fviz_pca_ind(res.pca, label="none", habillage=sample_labels,addEllipses=TRUE, ellipse.level=0.95)
 } else{
