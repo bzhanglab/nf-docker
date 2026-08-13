@@ -47,12 +47,12 @@ dev.off()
 raw_matrix=raw_matrix[rowMeans(raw_matrix)>0,]
 M <- cor(as.matrix(raw_matrix),method="spearman")
 pdf(file=file.path(output_dir, "gene_RSEM_tumor_normal_raw_log2(x+1)_BCM_corplot.pdf"),height=7,width=7)
-corrplot(M, method = "color",order = "hclust",tl.cex = 0.3,cl.lim=c(min(M),max(M)), is.corr=FALSE)
+corrplot(M, method = "color",order = "hclust",tl.cex = 0.3,col.lim=c(min(M),max(M)), is.corr=FALSE)
 dev.off()
 normalized_matrix=normalized_matrix[rowMeans(normalized_matrix)>0,]
 M <- cor(as.matrix(normalized_matrix),method="spearman")
 pdf(file = file.path(output_dir,  "gene_RSEM_tumor_normal_UQ_log2(x+1)_BCM_corplot.pdf"), height = 7, width = 7)
-corrplot(M, method = "color",order = "hclust",tl.cex = 0.3,cl.lim=c(min(M),max(M)), is.corr=FALSE)
+corrplot(M, method = "color",order = "hclust",tl.cex = 0.3,col.lim=c(min(M),max(M)), is.corr=FALSE)
 dev.off()
 
 pdf(file=file.path(output_dir, "gene_RSEM_tumor_normal_raw_log2(x+1)_BCM_pcaplot.pdf"),width=6,height=4)
@@ -107,7 +107,7 @@ write.table(round(log2(raw_matrix+1),2),file=file.path(output_dir, "gene_TPM_tum
 raw_matrix=raw_matrix[rowMeans(raw_matrix)>0,]
 M <- cor(as.matrix(raw_matrix),method="spearman")
 pdf(file=file.path(output_dir, "gene_TPM_tumor_normal_raw_log2(x+1)_BCM_corplot.pdf"),height=7,width=7)
-corrplot(M, method = "color",order = "hclust",tl.cex = 0.3,cl.lim=c(min(M),max(M)), is.corr=FALSE)
+corrplot(M, method = "color",order = "hclust",tl.cex = 0.3,col.lim=c(min(M),max(M)), is.corr=FALSE)
 dev.off()
 
 pdf(file=file.path(output_dir, "gene_TPM_tumor_normal_raw_log2(x+1)_BCM_pcaplot.pdf"),width=6,height=4)
@@ -149,7 +149,7 @@ write.table(round(log2(raw_matrix+1),2),file=file.path(output_dir, "gene_FPKM_tu
 raw_matrix=raw_matrix[rowMeans(raw_matrix)>0,]
 M <- cor(as.matrix(raw_matrix),method="spearman")
 pdf(file=file.path(output_dir, "gene_FPKM_tumor_normal_raw_log2(x+1)_BCM_corplot.pdf"),height=7,width=7)
-corrplot(M, method = "color",order = "hclust",tl.cex = 0.3,cl.lim=c(min(M),max(M)), is.corr=FALSE)
+corrplot(M, method = "color",order = "hclust",tl.cex = 0.3,col.lim=c(min(M),max(M)), is.corr=FALSE)
 dev.off()
 
 pdf(file=file.path(output_dir, "gene_FPKM_tumor_normal_raw_log2(x+1)_BCM_pcaplot.pdf"),width=6,height=4)
